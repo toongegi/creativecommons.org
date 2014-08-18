@@ -1,6 +1,7 @@
 [submodule "docroot/legalcode"]
 	path = docroot/legalcode
 	url = https://github.com/creativecommons/legalcode.git
+        branch = cc4-no-legalcode
 [submodule "python_env/src/i18n"]
 	path = python_env/src/i18n
 	url = https://github.com/creativecommons/i18n
