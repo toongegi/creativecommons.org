@@ -26,16 +26,13 @@ fi
 
 # 1. Copy config files into place
 
-if grep -q "apache.conf" /etc/apache2/httpd.conf
-then
-    echo "Note: /etc/apache2/httpd.conf seems to be loading an apache.conf file,"
-    echo "leaving it alone. If that's not the CC apache.conf file, then you'll"
-    echo "need to add the Include line manually."
-else
-    echo "Include ${TOPDIR}/config/apache.conf" >> /etc/apache2/httpd.conf
+if [ ! -f /etc/apache2/conf-available/creativecommons-template.conf ]; then
+    cp ${TOPDIR}/config/apache.conf \
+       /etc/apache2/conf-available/creativecommons-template.conf
+    a2enconf creativecommons-template
 fi
 
-cat <<EOF > /etc/apache2/sites-available/${HOSTNAME}
+cat <<EOF > /etc/apache2/sites-available/${HOSTNAME}.conf
 <VirtualHost *:80>
     Use CCVHost ${HOSTNAME} http ${TOPDIR} /var/log/apache2/${HOSTNAME}
 </VirtualHost>

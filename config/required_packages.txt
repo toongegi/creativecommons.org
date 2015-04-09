@@ -1,8 +1,10 @@
+git
 apache2
 python-virtualenv
 python-pip
 gcc
 python-dev
+zlib1g-dev
 libxml2
 libxml2-dev
 libxslt1.1
