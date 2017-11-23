@@ -7,7 +7,7 @@ libxml2-dev
 libxslt1.1
 libxslt-dev
 libz-dev
-php5
+php7.0
 python-dev
 python-librdf
 python-pip
