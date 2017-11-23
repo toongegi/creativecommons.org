@@ -26,6 +26,11 @@ done
 pip2 install requests
 ################################################################################
 
+################################################################################
+# More missing dependencies
+pip2 install sphinx routes webob beautifulsoup4 waitress
+################################################################################
+
 # On Ubuntu, virtualenv setups don't "see" dist-packages, which is
 # where Ubuntu-packaged modules go. This works around that problem:
 
