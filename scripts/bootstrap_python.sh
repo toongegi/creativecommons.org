@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 TOPDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
@@ -29,7 +30,8 @@ pip2 install requests
 ################################################################################
 # More missing dependencies
 pip2 install sphinx routes webob beautifulsoup4 waitress
-#pip2 install unittest2 zope.component
+pip2 install unittest2 zope.component zope.i18nmessageid zope.schema
+pip2 install http://dev.w3.org/2004/PythonLib-IH/dist/pyRdfa.tar.gz#egg=pyRdfa-2.3.7
 ################################################################################
 
 # On Ubuntu, virtualenv setups don't "see" dist-packages, which is
