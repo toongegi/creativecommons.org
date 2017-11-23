@@ -20,6 +20,12 @@ do
     pip2 install $i
 done
 
+################################################################################
+# Avoid:
+# pkg_resources.ContextualVersionConflict: (idna 2.2 (/usr/lib/python2.7/dist-packages), Requirement.parse('idna<2.7,>=2.5'), set(['requests']))
+pip2 install requests
+################################################################################
+
 # On Ubuntu, virtualenv setups don't "see" dist-packages, which is
 # where Ubuntu-packaged modules go. This works around that problem:
 
