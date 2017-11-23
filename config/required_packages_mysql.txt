@@ -1,0 +1,3 @@
+mariadb-server
+mariadb-client
+php5-mysql

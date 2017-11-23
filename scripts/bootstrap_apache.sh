@@ -11,16 +11,17 @@ HOSTNAME=${1:-creativecommons.org}
 function config_conf {
     FILE="${1}"
     HOST="${2}"
+    PORT="${3}"
     perl -p -i -e "s/\\$\{port\}/${PORT}/g" "${FILE}"
     perl -p -i -e "s/\\$\{host\}/${HOST}/g" "${FILE}"
     perl -p -i -e "s/\\$\{proto\}/${PROTO}/g" "${FILE}"
     perl -p -i -e "s|\\$\{dir\}|${TOPDIR}|g" "${FILE}"
-    perl -p -i -e "s|\\$\{logdir\}|/var/log/apache2/${HOSTNAME}|g" "${FILE}"
+    perl -p -i -e "s|\\$\{logdir\}|/var/log/apache2/${HOST}|g" "${FILE}"
 }
 
 HTTPSCONF="/etc/apache2/sites-available/${HOSTNAME}.conf"
 cp ${TOPDIR}/config/apache.conf "${HTTPSCONF}"
-config_conf "${HTTPSCONF}" "${HOSTNAME}"
+config_conf "${HTTPSCONF}" "${HOSTNAME}" "${PORT}"
 
 # 2. Create logging directory
 

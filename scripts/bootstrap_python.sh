@@ -72,7 +72,7 @@ sed -e "s|@env_dir@|${TOPDIR}/python_env|" \
     < "python_env/bin/ccengine.fcgi.in" \
     > "python_env/bin/ccengine.fcgi"
 
-#chmod 755 python_env/bin/ccengine.fcgi
+chmod 755 python_env/bin/ccengine.fcgi
 
 #
 # Support the semantic web
