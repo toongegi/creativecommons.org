@@ -29,6 +29,7 @@ pip2 install requests
 ################################################################################
 # More missing dependencies
 pip2 install sphinx routes webob beautifulsoup4 waitress
+#pip2 install unittest2 zope.component
 ################################################################################
 
 # On Ubuntu, virtualenv setups don't "see" dist-packages, which is
