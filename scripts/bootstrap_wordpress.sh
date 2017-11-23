@@ -2,10 +2,10 @@
 
 TOPDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
-HOSTNAME=${1:-creativecommons.org}
-DBNAME=${2:-wordpress}
-DBUSER=${3:-dbuser}
-DBPASS=${4:-}
+DBNAME="${1:-wordpress}"
+DBUSER="${2:-dbuser}"
+DBPASS="${3:-}"
+DBHOST="${4:-}"
 
 pushd ${TOPDIR}
 
@@ -24,6 +24,12 @@ php ${TOPDIR}/composer.phar install
 # Make sure wp-content hierarchy is correct
 
 mkdir -p ${TOPDIR}/docroot/wp-content/themes
+chgrp -R www-data ${TOPDIR}/docroot/wp-content/themes
+
+#
+# Make uploads dir writeable
+#
+
 mkdir -p ${TOPDIR}/docroot/wp-content/uploads
 chgrp -R www-data ${TOPDIR}/docroot/wp-content/uploads
 
@@ -54,7 +60,7 @@ fi
 #
 
 sed -e "s|@dbname@|${DBNAME}|;s|@dbuser@|${DBUSER}|;s|@dbpass@|${DBPASS}|" \
-    < "docroot/wp-config-local.php.in" \
-    > "docroot/wp-config-local.php"
+     < "docroot/wp-config-local.php.in" \
+     > "docroot/wp-config-local.php"
 
 popd # to original

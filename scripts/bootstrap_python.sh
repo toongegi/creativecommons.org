@@ -1,12 +1,7 @@
 #!/bin/bash
 
 TOPDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
-
 pushd ${TOPDIR}
-
-#
-# Set up transifex
-#
 
 #
 # Set up Python env
@@ -19,11 +14,10 @@ source bin/activate
 
 # No RDF in pip (it's rdfutils)
 
-for i in 'setuptools>=0.7' 'zope.interface>=3.8.0' Paste PasteDeploy \
-                           PasteScript rdfutils cssselect transifex-client \
-			   pysocks
+for i in 'setuptools>=0.7' Paste PasteDeploy PasteScript rdfutils cssselect \
+         transifex-client pysocks
 do
-    pip install $i
+    pip2 install $i
 done
 
 # On Ubuntu, virtualenv setups don't "see" dist-packages, which is
@@ -36,6 +30,7 @@ echo "/usr/lib/python2.7/dist-packages/" \
 # Check out and set up each Python module
 #
 
+mkdir -p src
 pushd src
 
 REPOS=(cc.i18n cc.licenserdf cc.license cc.engine)
@@ -49,19 +44,16 @@ do
     else
         git clone "https://github.com/creativecommons/${i}.git"
     fi
-done
-
-REPOS+=(cc.engine)
-for i in "${REPOS[@]}"
-do
     pushd "${i}"
-    python bootstrap.py -v 2.1.1
+    python2 bootstrap.py -v 2.1.1
     bin/buildout
-    python setup.py develop
+    python2 setup.py install
     popd
 done
 
 popd # to python_env
+# OR
+#pip2 install git+https://github.com/creativecommons/cc.engine
 
 #
 # compile_mo & transstats are needed by cc.engine at runtime, run them now
@@ -80,7 +72,7 @@ sed -e "s|@env_dir@|${TOPDIR}/python_env|" \
     < "python_env/bin/ccengine.fcgi.in" \
     > "python_env/bin/ccengine.fcgi"
 
-chmod 755 python_env/bin/ccengine.fcgi
+#chmod 755 python_env/bin/ccengine.fcgi
 
 #
 # Support the semantic web
@@ -94,3 +86,7 @@ ln -s ${TOPDIR}/docroot/cc.licenserdf/cc/licenserdf/licenses \
    ${TOPDIR}/docroot/license_rdf
 
 popd # to original
+
+#
+# Set up transifex
+#
